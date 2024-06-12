@@ -1,12 +1,9 @@
-import apiClient from "../Services/apiClient";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient, {CanceledError} from "../Services/apiClient";
+import userService, { User } from "../Services/userService";
 
-interface User {
-    id: number
-    name: string
-}
-const DeleteData = () => {
+
+const UpdateDataService = () => {
     //we need a useState to help us hold the state of our users
     const [users, setUsers] = useState<User[]>([]);
     //useState to help use handle errors
@@ -19,7 +16,8 @@ const DeleteData = () => {
         setIsLoading(true);
 
         //added x before users to create an error
-        axios.get("https://jsonplaceholder.typicode.com/users")
+        const {request} = userService.getAll<User>();
+        request
         .then(response => {
         setUsers(response.data)
         setIsLoading(false);
@@ -35,16 +33,25 @@ const DeleteData = () => {
      
     }, [])   
 
-//create a helper function to help us delete our users
-const userDelete = (user:User) => {
-setUsers(users.filter(u => u.id != user.id))
+//create a helper function to help us update our users
+const updateUser = (user:User) => {
+    const originalUsers = [...users]
+    const updatedUser = {...user, name: user.name + "!"}
+    setUsers(users.map(u => u.id === user.id ? updatedUser : u))
+    userService.update(updatedUser)
+    .catch(error => {
+        setError(error.message)
+        setUsers(originalUsers)
+    })
 }
 
   return (
     <>
-    <h1 className="text-center">CRUD Delete with axios</h1>
+    <h1 className="text-center">CRUD Update with Axios</h1>
+   
+
     <ul className="list-group">
-        {users.map(user => <li className="list-group-item d-flex justify-content-between" key={user.id}>{user.name} <button onClick={() => userDelete(user)} className="btn btn-outline-danger">Delete</button></li>)}
+        {users.map(user => <li className="list-group-item d-flex justify-content-between" key={user.id}>{user.name} <button className="btn btn-outline-secondary" onClick={() => updateUser(user)}>Update</button></li>)}
         
         {error && <p className="text-danger">{error}</p>}
         { isLoading && <div className="spinner-border"></div>}
@@ -53,4 +60,4 @@ setUsers(users.filter(u => u.id != user.id))
   )
 }
 
-export default DeleteData
+export default UpdateDataService

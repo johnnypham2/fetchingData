@@ -7,12 +7,18 @@ import FetchingWFetch from "./components/FetchingWFetch"
 import AsyncAwait from "./components/AsyncAwait"
 import LoadingIndicator from "./components/LoadingIndicator"
 import DeleteData from "./components/DeleteData"
+import CreateData from "./components/CreateData"
+import UpdateData from "./components/UpdateData"
+import DeleteDataService from "./components/DeleteDataService"
 const App = () => {
 // const [category, setCategory] = useState('')
   return (
     <>
       <h1 className="text-center">React Fetching Data Examples, Using Axios, services, Http, CRUD</h1>
-      <DeleteData/>
+      <DeleteDataService/>
+      {/* <UpdateData/> */}
+      {/* <CreateData/> */}
+      {/* <DeleteData/> */}
       {/* <LoadingIndicator/> */}
       {/* <AsyncAwait/> */}
       {/* <FetchingWFetch/> */}
