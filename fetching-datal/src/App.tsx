@@ -16,15 +16,15 @@ const App = () => {
     <>
       <h1 className="text-center">React Fetching Data Examples, Using Axios, services, Http, CRUD</h1>
       <DeleteDataService/>
-      {/* <UpdateData/> */}
-      {/* <CreateData/> */}
-      {/* <DeleteData/> */}
-      {/* <LoadingIndicator/> */}
-      {/* <AsyncAwait/> */}
-      {/* <FetchingWFetch/> */}
-      {/* <FetchingAxios/>  */}
-      {/* <UseEffectExample/> */}
-      {/* <UseEffectExample2/> */}
+      <UpdateData/> */
+      <CreateData/>
+      <DeleteData/>
+      <LoadingIndicator/>
+      <AsyncAwait/>
+      <FetchingWFetch/>
+      <FetchingAxios/> 
+      <UseEffectExample/>
+      <UseEffectExample2/>
       {/* <ProductList category={category}/>
       <div>
         <select className="form-select" onChange={(e) => setCategory(e.target.value)}>
